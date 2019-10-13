@@ -1,0 +1,16 @@
+ {
+    "name": "Premium Herald",
+    "version": "1.0",
+    "description": "An extension for reading New Zealand Herald's premium content without a subscription",
+    "manifest_version": 2,
+    "content_scripts": [
+  {
+    "matches": [
+      "https://www.nzherald.co.nz/*"
+    ],
+    "js": ["content.js"],
+    "css": ["content.css"],
+    "match_about_blank": true,
+  }
+]
+  }
