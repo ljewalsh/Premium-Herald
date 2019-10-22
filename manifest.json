@@ -10,7 +10,7 @@
     ],
     "js": ["content.js"],
     "css": ["content.css"],
-    "match_about_blank": true,
+    "match_about_blank": true
   }
 ]
-  }
+}

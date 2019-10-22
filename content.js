@@ -1,21 +1,13 @@
-var main = document.createElement('div')
-main.classList.add('body')
+function showPremiumSpans(spans){
+    for (span of spans) {
+        span.style.color = '#000'
+        span.style.opacity = 1
+        span.style.display = 'inline'
+    }
+}
 
-var header = document.querySelector('header h1')
-main.appendChild(header.cloneNode(true))
-
-var image = document.querySelector('.header-image-wrapper img')
-main.appendChild(image.cloneNode(true))
-
-const article = document.getElementById('article-content')
-if (article.classList.contains('premium-content')){
-
-    var paragraphs = document.querySelectorAll('#article-content p')
-
-    var i;
-    for (i = 0; i < paragraphs.length; i++) {
-        var paragraph = paragraphs[i]
-
+function addPremiumParagraphs(main, paragraphs){
+    for (paragraph of paragraphs) {
         var healthyElement = paragraph.cloneNode(true)
         var spans = healthyElement.children
 
@@ -23,18 +15,36 @@ if (article.classList.contains('premium-content')){
         healthyElement.style.color.opacity = 1
         healthyElement.style.display = 'block'
 
-        var e
-        for (e = 0; e < spans.length; e++) {
-            spans[e].style.color = '#000'
-            spans[e].style.opacity = 1
-            spans[e].style.display = 'inline'
-        }
+        showPremiumSpans(spans)
 
         main.appendChild(healthyElement)
     }
-
-    var x=window.open();
-    x.document.open();
-    x.document.write(main.outerHTML);
-    x.document.close();
+    return main
 }
+
+function getPremiumContent(){
+    const article = document.getElementById('article-content')
+    if (article.classList.contains('premium-content')){
+        var main = document.createElement('div')
+        main.classList.add('body')
+
+        var header = document.querySelector('header h1')
+        main.appendChild(header)
+
+        var image = document.querySelector('.header-image-wrapper img')
+        if (image){
+            main.appendChild(image.cloneNode(true))
+        }
+
+        var paragraphs = document.querySelectorAll('#article-content p')
+
+        const mainWithPremiumContent = addPremiumParagraphs(main, paragraphs)
+
+        var x=window.open();
+        x.document.open();
+        x.document.write(mainWithPremiumContent.outerHTML);
+        x.document.close();
+    }
+}
+
+window.onload = getPremiumContent()
